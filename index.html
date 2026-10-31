@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Scoopian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;800&family=Noto+Serif+Sinhala:wght@700;800&display=swap" rel="stylesheet">
+<style id="css">
+:root{--bg:#FFF5EC;--surface:#fff;--ink:#111;--muted:#5E5650;--teal:#C24E00;--on-teal:#fff;--sun:#FF7A00;--line:#F0D9C6;--hero:#0A0A0A;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A0A0A;--surface:#1A1A1A;--ink:#F7F1EA;--muted:#B5AAA0;--teal:#FF8A1F;--on-teal:#0A0A0A;--line:#333}}
+:root[data-theme="dark"]{--bg:#0A0A0A;--surface:#1A1A1A;--ink:#F7F1EA;--muted:#B5AAA0;--teal:#FF8A1F;--on-teal:#0A0A0A;--line:#333}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Sinhala",system-ui,sans-serif;line-height:1.75;padding-bottom:90px}
+h1,h2{font-family:"Noto Serif Sinhala",Georgia,serif;line-height:1.35;margin:0}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.hero{background:var(--hero);color:#fff;position:relative;overflow:hidden;padding:28px 0 64px;border-bottom:5px solid var(--sun)}
+.hero::after{content:"";position:absolute;right:-70px;bottom:-90px;width:260px;height:260px;border-radius:50%;background:var(--sun)}
+.hero .wrap{position:relative;z-index:1}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.rt{display:flex;gap:10px;align-items:center}
+.brand{font-weight:800;font-size:1.1rem}
+.lang{display:flex;border:2px solid var(--sun);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;color:#fff;font:600 .95rem "Noto Sans Sinhala",system-ui,sans-serif;padding:6px 16px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--sun);color:#0A0A0A}
+.hero h1{font-size:clamp(2rem,7vw,3.4rem);max-width:15ch}
+.hero p{max-width:34ch;margin:18px 0 28px;font-size:1.05rem;opacity:.92}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 26px;font:600 1rem "Noto Sans Sinhala",system-ui,sans-serif;cursor:pointer;text-decoration:none;background:var(--sun);color:#0A0A0A}
+.adm{background:#fff;padding:6px 14px;font-size:.9rem}
+.btn:focus-visible,input:focus-visible,.q button:focus-visible,.lang button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+section{padding:44px 0}
+h2{font-size:1.6rem;margin-bottom:6px}
+.sub{color:var(--muted);margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.pic{aspect-ratio:4/3;width:100%;border-radius:10px;object-fit:cover;background:var(--bg);display:grid;place-items:center;font-size:3rem}
+.item b{font-size:1.05rem}
+.price{color:var(--teal);font-weight:800}
+.q{display:flex;align-items:center;gap:12px;margin-top:8px}
+.q button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.3rem;cursor:pointer}
+.q span{min-width:1.5ch;text-align:center;font-weight:700}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:0;margin:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border-left:5px solid var(--sun);border-radius:10px;padding:12px 16px}
+.steps li::before{content:counter(s)". ";font-weight:800;color:var(--teal)}
+form{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px;max-width:560px}
+label{display:grid;gap:4px;font-weight:600}
+input{font:inherit;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.sum{margin:0 0 4px;padding:0;list-style:none}
+.sum li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding:4px 0}
+.tot{font-weight:800;display:flex;justify-content:space-between;font-size:1.1rem}
+.err{color:#C0392B;font-weight:600;min-height:1.5em;margin:0}
+.send{background:var(--teal);color:var(--on-teal);text-align:center}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#0A0A0A;color:#fff;border-top:3px solid var(--sun);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:5}
+.bar .btn{padding:8px 20px}
+footer{text-align:center;color:var(--muted);padding:20px 20px 30px}
+dialog{width:calc(100% - 24px);max-width:640px;border:0;border-radius:14px;padding:18px;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+.row{display:grid;gap:8px;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}
+.th{width:96px;height:72px;object-fit:cover;border-radius:8px;background:var(--bg)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="application/json" id="data">{"products":[{"id":"p1","si":"සුවඳ පුංචි ඉටිපන්දම","en":"Scented mini candle","p":850,"img":"","e":"data:image/jpeg;base64,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"},{"id":"p2","si":"අතින් සාදන සබන්","en":"Handmade soap","p":450,"img":"","e":"🧼"},{"id":"p3","si":"පුංචි පෝච්චි පැළය","en":"Mini plant pot","p":1200,"img":"","e":"🪴"},{"id":"p4","si":"සටහන් පොත","en":"Notebook","p":600,"img":"","e":"📓"},{"id":"p5","si":"කෝප්පය","en":"Mug","p":1500,"img":"","e":"☕"},{"id":"p6","si":"යතුරු කූරු අලංකාරය","en":"Keychain charm","p":350,"img":"","e":"🔑"}]}</script>
+<script id="app">
+var WA="94713801417";
+var T={
+si:{h1:"ඔබට අවශ්‍ය පුංචි දේවල්, ගෙදරටම",hp:"භාණ්ඩ තෝරා, ඇණවුම WhatsApp හරහා යවන්න. අපි ඔබව අමතා තහවුරු කරන්නෙමු.",see:"භාණ්ඩ බලන්න",s1:"භාණ්ඩ තෝරන්න",s2:"ඔබේ විස්තර ලියන්න",s3:"WhatsApp හරහා ඇණවුම යවන්න",hi:"අපගේ භාණ්ඩ",si:"ඔබට කැමති භාණ්ඩ තෝරා කූඩයට එකතු කරන්න.",ho:"ඇණවුම් කරන්න",so:"ඔබේ කූඩයේ ඇති භාණ්ඩ පහත දැක්වේ.",tot:"මුළු මුදල",nm:"නම",ph:"දුරකථන අංකය",ad:"ලිපිනය",go:"ඇණවුම WhatsApp හරහා යවන්න",bb:"ඇණවුම් කරන්න",empty:"කූඩය හිස්ය. ඉහත භාණ්ඩ තෝරන්න.",e1:"කරුණාකර අවම වශයෙන් එක් භාණ්ඩයක් තෝරන්න.",e2:"නම, දුරකථන අංකය සහ ලිපිනය සම්පූර්ණ කරන්න.",cnt:"කූඩයේ භාණ්ඩ ",cur:"රු. ",mh:"නව ඇණවුමක්",mt:"මුළු මුදල",mn:"නම",mp:"දුරකථන",ma:"ලිපිනය",less:"අඩු කරන්න",more:"වැඩි කරන්න"},
+en:{h1:"Little things you need, delivered home",hp:"Pick your items and send the order on WhatsApp. We will call you to confirm.",see:"Browse items",s1:"Choose items",s2:"Enter your details",s3:"Send the order on WhatsApp",hi:"Our items",si:"Choose what you like and add it to your cart.",ho:"Place your order",so:"The items in your cart are listed below.",tot:"Total",nm:"Name",ph:"Phone number",ad:"Address",go:"Send order on WhatsApp",bb:"Order now",empty:"Your cart is empty. Choose items above.",e1:"Please choose at least one item.",e2:"Please fill in your name, phone number and address.",cnt:"Items in cart: ",cur:"Rs. ",mh:"New order",mt:"Total",mn:"Name",mp:"Phone",ma:"Address",less:"Decrease",more:"Increase"}
+};
+var SHELL=`<header class="hero"><div class="wrap"><div class="top"><div class="brand">The Scoopian</div><div class="rt"><button type="button" class="btn adm" id="adm" hidden>⚙ භාණ්ඩ වෙනස් කරන්න</button><div class="lang" role="group" aria-label="Language"><button type="button" data-l="si" aria-pressed="true">සිංහල</button><button type="button" data-l="en" aria-pressed="false">English</button></div></div></div><h1 data-t="h1"></h1><p data-t="hp"></p><a class="btn" href="#items" data-t="see"></a></div></header>
+<main><section><div class="wrap"><ol class="steps"><li data-t="s1"></li><li data-t="s2"></li><li data-t="s3"></li></ol></div></section>
+<section id="items"><div class="wrap"><h2 data-t="hi"></h2><p class="sub" data-t="si"></p><div class="grid" id="grid"></div></div></section>
+<section id="order"><div class="wrap"><h2 data-t="ho"></h2><p class="sub" data-t="so"></p><form id="f" novalidate><ul class="sum" id="sum"></ul><div class="tot"><span data-t="tot"></span><span id="tot"></span></div><label><span data-t="nm"></span><input id="n" autocomplete="name"></label><label><span data-t="ph"></span><input id="p" type="tel" autocomplete="tel"></label><label><span data-t="ad"></span><input id="a" autocomplete="street-address"></label><p class="err" id="err" role="alert"></p><a class="btn send" id="go" href="#" target="_blank" rel="noopener" data-t="go"></a></form></div></section></main>
+<footer>© The Scoopian</footer>
+<div class="bar"><span id="cnt"></span><a class="btn" href="#order" data-t="bb"></a></div>
+<dialog id="dlg"><h2>භාණ්ඩ කළමනාකරණය</h2><p class="sub">නම, මිල සහ ඡායාරූප වෙනස් කර "සුරකින්න" ඔබන්න. වෙනස්කම් සියලු දෙනාට පෙනේ.</p><div id="rows"></div><p class="err" id="aerr" role="alert"></p><div class="acts"><button type="button" class="btn ghost" id="add">+ භාණ්ඩයක් එකතු කරන්න</button><button type="button" class="btn" id="save">සුරකින්න සහ ප්‍රකාශයට පත් කරන්න</button><button type="button" class="btn ghost" id="cls">වසන්න</button></div></dialog>`;
+document.getElementById("root").innerHTML=SHELL;
+var P=JSON.parse(document.getElementById("data").textContent).products;
+var Q={},L="si",E=[],A=null,AS=null;
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+function nm(x){return x[L]||x.si||""}
+function fmt(x){return T[L].cur+Number(x).toLocaleString("en-US")}
+function draw(){
+ var t=T[L];
+ document.getElementById("grid").innerHTML=P.map(function(x,k){
+  var q=Q[x.id]||0;
+  return '<div class="item">'+(x.img?'<img class="pic" src="'+esc(x.img)+'" alt="'+esc(nm(x))+'" loading="lazy">':'<div class="pic">'+esc(x.e||"🛍️")+'</div>')+'<b>'+esc(nm(x))+'</b><span class="price">'+fmt(x.p)+'</span><div class="q"><button type="button" aria-label="'+t.less+'" data-k="'+k+'" data-d="-1">−</button><span>'+q+'</span><button type="button" aria-label="'+t.more+'" data-k="'+k+'" data-d="1">+</button></div></div>';
+ }).join("");
+ var c=0,s=0,h="";
+ P.forEach(function(x){var q=Q[x.id]||0;if(q){c+=q;s+=q*x.p;h+='<li><span>'+esc(nm(x))+' × '+q+'</span><span>'+fmt(q*x.p)+'</span></li>'}});
+ document.getElementById("sum").innerHTML=h||'<li>'+t.empty+'</li>';
+ document.getElementById("tot").textContent=fmt(s);
+ document.getElementById("cnt").textContent=t.cnt+c+" · "+fmt(s);
+ return s;
+}
+function setLang(l){
+ L=l;document.documentElement.lang=l;
+ document.querySelectorAll("[data-t]").forEach(function(e){e.textContent=T[l][e.dataset.t]});
+ document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.l===l?"true":"false")});
+ document.getElementById("err").textContent="";
+ try{localStorage.setItem("lang",l)}catch(e){}
+ draw();
+}
+document.querySelector(".lang").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setLang(b.dataset.l)});
+document.getElementById("grid").addEventListener("click",function(e){
+ var b=e.target.closest("button");if(!b)return;
+ var x=P[+b.dataset.k];Q[x.id]=Math.max(0,(Q[x.id]||0)+(+b.dataset.d));draw();
+});
+document.getElementById("go").addEventListener("click",function(e){
+ var t=T[L],s=draw(),n=document.getElementById("n").value.trim(),p=document.getElementById("p").value.trim(),a=document.getElementById("a").value.trim(),er=document.getElementById("err");
+ if(!s){e.preventDefault();er.textContent=t.e1;return}
+ if(!n||!p||!a){e.preventDefault();er.textContent=t.e2;return}
+ er.textContent="";
+ var m="*The Scoopian – "+t.mh+"*\n\n";
+ P.forEach(function(x){var q=Q[x.id]||0;if(q)m+="• "+nm(x)+" × "+q+" = "+fmt(q*x.p)+"\n"});
+ m+="\n*"+t.mt+":* "+fmt(s)+"\n\n*"+t.mn+":* "+n+"\n*"+t.mp+":* "+p+"\n*"+t.ma+":* "+a;
+ this.href="https://wa.me/"+WA+"?text="+encodeURIComponent(m);
+});
+/* ---- owner editing ---- */
+function rows(){
+ document.getElementById("rows").innerHTML=E.map(function(x,k){
+  return '<div class="row"><label>නම (සිංහල)<input data-k="'+k+'" data-f="si" value="'+esc(x.si)+'"></label><label>Name (English)<input data-k="'+k+'" data-f="en" value="'+esc(x.en)+'"></label><label>මිල (රු.)<input type="number" min="0" inputmode="decimal" data-k="'+k+'" data-f="p" value="'+esc(x.p)+'"></label><label>ඡායාරූපය<input type="file" accept="image/*" data-k="'+k+'" data-f="file"></label>'+(x.img?'<img class="th" src="'+esc(x.img)+'" alt="">':'')+'<div class="acts"><button type="button" class="btn ghost" data-k="'+k+'" data-del="1">ඉවත් කරන්න</button></div></div>';
+ }).join("");
+}
+function shrink(f){return new Promise(function(ok,no){var i=new Image(),u=URL.createObjectURL(f);i.onload=function(){var r=Math.min(1,800/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*r;c.height=i.height*r;c.getContext("2d").drawImage(i,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){b?ok(b):no()},"image/jpeg",.85)};i.onerror=no;i.src=u})}
+function build(prod){
+ var css=document.getElementById("css").textContent,js=document.getElementById("app").textContent;
+ return '<!DOCTYPE html>\n<html lang="si">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<title>The Scoopian</title>\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;800&family=Noto+Serif+Sinhala:wght@700;800&display=swap" rel="stylesheet">\n<style id="css">'+css+'</style>\n</head>\n<body>\n<div id="root"></div>\n<script type="application/json" id="data">'+JSON.stringify({products:prod}).replace(/</g,"\\u003c")+'<\/script>\n<script id="app">'+js+'<\/script>\n</body>\n</html>';
+}
+(async function(){
+ try{
+  if(!window.claude)return;
+  var u=await claude.use("user");
+  if(!u||!(u.isOwner()||u.canEdit()))return;
+  A=await claude.use("artifact");AS=await claude.use("assets");
+  if(!A)return;
+  var d=document.getElementById("dlg"),er=document.getElementById("aerr"),ab=document.getElementById("adm");
+  ab.hidden=false;
+  ab.onclick=function(){E=JSON.parse(JSON.stringify(P));er.textContent="";rows();d.showModal()};
+  document.getElementById("cls").onclick=function(){d.close()};
+  document.getElementById("add").onclick=function(){E.push({id:"p"+Date.now(),si:"",en:"",p:0,img:"",e:"🛍️"});rows()};
+  document.getElementById("rows").addEventListener("input",function(e){
+   var t=e.target,x=E[+t.dataset.k];if(!x||!t.dataset.f||t.dataset.f==="file")return;
+   x[t.dataset.f]=t.dataset.f==="p"?Number(t.value)||0:t.value;
+  });
+  document.getElementById("rows").addEventListener("change",async function(e){
+   var t=e.target,x=E[+t.dataset.k];if(!x||t.dataset.f!=="file"||!t.files[0])return;
+   if(!AS){er.textContent="ඡායාරූප උඩුගත කිරීමට ඔබට අවසර නැත.";return}
+   er.textContent="උඩුගත වෙමින්…";
+   try{var b=await shrink(t.files[0]).catch(function(){return t.files[0]});var r=await AS.upload(b);x.img=r.url;er.textContent="";rows()}catch(x2){er.textContent="ඡායාරූපය උඩුගත කිරීම අසාර්ථකයි."}
+  });
+  document.getElementById("rows").addEventListener("click",function(e){
+   var b=e.target.closest("button[data-del]");if(!b)return;
+   E.splice(+b.dataset.k,1);rows();
+  });
+  document.getElementById("save").onclick=async function(){
+   var ok=E.filter(function(x){return (x.si||x.en||"").trim()});
+   er.textContent="සුරකිමින්…";
+   try{await A.publish(build(ok))}catch(x){er.textContent="සුරැකීම අසාර්ථකයි. නැවත උත්සාහ කරන්න."}
+  };
+ }catch(x){}
+})();
+var saved="si";try{saved=localStorage.getItem("lang")||"si"}catch(e){}
+setLang(saved==="en"?"en":"si");
+</script>
+</body>
+</html>
